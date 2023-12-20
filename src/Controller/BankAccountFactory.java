@@ -1,35 +1,37 @@
 package Controller;
-//Klass som hämtar instanser av BankAccount
 
 import Model.BankAccount;
 import Model.SalaryAccount;
 import Model.SavingsAccount;
 import Model.User;
 
-public class BankAccountFactory {
-
+//The BankAccountFactory-class acts as a factory & controller for the logic of creating BankAccount-objects (SalaryAccount, SavingsAccount)
+public class BankAccountFactory
+{
     public BankAccount bankAccount;
 
-    public BankAccountFactory(int accountType, User user) {
-
+    public BankAccountFactory(int accountType, User user)
+    {
         this.init(accountType, user);
-
     }
 
-    // Metod där användaren väljer antingen Salary eller SavingsAccount
-    public void init(int accountType, User user) {
-        switch(accountType) {
+    // The factory creates the relevant object based on the user-input from the ViewManager
+    public void init(int accountType, User user)
+    {
+        switch(accountType)
+        {
             case 1:
-                this.bankAccount = new SalaryAccount(user.personalId, 0.0);
+                this.bankAccount = new SalaryAccount(user.getPersonalId(), 0.0);
                 break;
             case 2:
-                this.bankAccount = new SavingsAccount(user.personalId, 0.0, 2.5);
+                this.bankAccount = new SavingsAccount(user.getPersonalId(), 0.0, 2.5);
                 break;
         }
     }
 
-
-    public BankAccount getBankAccount() {
+    //Getter for the BankAccount-object
+    public BankAccount getBankAccount()
+    {
         return this.bankAccount;
     }
 }

@@ -2,32 +2,34 @@ package Model;
 
 import java.util.ArrayList;
 
-//User-klassen håller i information om en användare av vår app. Vi sparar personnummer och bankkonton.
-public class User {
+//The User-class is a model of a user
+public class User
+{
+    private final String personalId;
+    private final ArrayList<BankAccount> bankAccounts;
 
-    public String personalId;
-
-    public ArrayList<BankAccount> bankAccounts = new ArrayList<>();
-
-    public User(String personalId) {
+    //Constructor for initializing a new User
+    public User(String personalId)
+    {
         this.personalId = personalId;
+        this.bankAccounts = new ArrayList<>();
     }
 
-    public void addBankAccount(BankAccount bankAccount) {
-
+    //Method to add a BankAccount to the User
+    public void addBankAccount(BankAccount bankAccount)
+    {
         this.bankAccounts.add(bankAccount);
-
     }
 
-    public BankAccount getBankAccount() {
-
-        return this.bankAccounts.get(0);
-
+    //Getter for the User's bank accounts
+    public ArrayList<BankAccount> getBankAccount()
+    {
+        return this.bankAccounts;
     }
 
-    public String getPersonalId(){
+    //Getter for the User's personalId
+    public String getPersonalId()
+    {
         return personalId;
     }
-
-
 }
