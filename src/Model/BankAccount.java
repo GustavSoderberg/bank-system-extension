@@ -2,50 +2,32 @@ package Model;
 
 import java.time.LocalDateTime;
 
-//Abstrakt klass som skapar upp instans av SalaryAccount och SavingsAccount.
+//The BankAccount-class is an abstract model that contains the shared BankAccount parameters (balance, creationDate) between the SalaryAccount and SavingsAccount
+public abstract class BankAccount
+{
+    private double balance;
 
-public abstract class BankAccount {
+    private final LocalDateTime creationDate;
 
-
-    public String personalId;
-    public double balance;
-    public LocalDateTime creationDate;
-
-    public BankAccount(String personalId, double balance)
+    //Constructor for initializing a new BankAccount
+    public BankAccount(double balance)
     {
-        this.personalId = personalId;
-        this.balance = balance;
+        this.balance = 0.0;
         this.creationDate = LocalDateTime.now();
     }
 
-    public String getPersonalId() {
-        return personalId;
+    //Setter for the balance
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
+    //Getter for the balance
     public double getBalance() {
         return balance;
-    } // Metod för att se saldo
+    }
 
+    //Getter for the creation date
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
-
-    public Boolean deposit(double balance) {
-
-        this.balance += balance;
-        return true;
-
-    } // Metod för insättning av pengar
-
-    public Boolean withdraw(double balance) {
-
-        if (this.balance < balance) {
-            System.out.println("Otillräckliga medel");
-            return false;
-        }
-        else {
-            this.balance -= balance; //this.balance = this.balance - balance;
-            return true;
-        }
-    } // Metod för uttag av pengar. Kollar om det finns tillräckligt pengar.
 }
