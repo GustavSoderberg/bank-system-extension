@@ -1,7 +1,8 @@
 package Controller;
 
-import Model.BankAccount;
-import Model.User;
+import Model.*;
+
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ViewManager
@@ -117,7 +118,20 @@ public class ViewManager
         {
             for (BankAccount bankAccount : user.getBankAccount())
             {
-                message += "Bankkontonummer " + i + " har ett saldo på: " + String.format("%.2f", bankAccount.getBalance()) + "\n";
+                String accountName = "Unknown";
+                String additionalInfo = "";
+
+                if (bankAccount instanceof SalaryAccount){
+                    accountName = "Lönekonto";
+                    DebitCard db = ((SalaryAccount) bankAccount).getDebitCard();
+                    additionalInfo = ". Kontot skapades den " + bankAccount.getCreationDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) + " och har ett Kort med nummer " + db.getCardNumber() + " anslutet till sig";
+                }
+                else if (bankAccount instanceof SavingsAccount){
+                    accountName = "Sparkonto";
+                    SavingsAccount sa = ((SavingsAccount) bankAccount);
+                    additionalInfo = ". Kontot skapades den " + bankAccount.getCreationDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) + " och har för tillfället en ränta på " + sa.getInterestRate();
+                }
+                message += "Konto nummer " + i + "\nTyp: " + accountName + ". Har ett saldo på: " + String.format("%.2f", bankAccount.getBalance()) + additionalInfo + "\n";
                 i++;
             }
         }
